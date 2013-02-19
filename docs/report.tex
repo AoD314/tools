@@ -1,0 +1,114 @@
+\documentclass[12pt, a4paper, utf8]{extarticle}
+%\documentclass[14pt, a6paper, utf8]{extarticle} %for kindle
+
+\usepackage[utf8]{inputenc}
+\usepackage[english, russian]{babel}
+\usepackage[T2A]{fontenc}
+\usepackage{xltxtra}
+\usepackage{xecyr}
+
+\usepackage{fontspec}
+\defaultfontfeatures{Scale=MatchLowercase}
+\setmainfont[Mapping=tex-text]{Liberation Serif}
+\setsansfont[Mapping=tex-text]{Liberation Sans}
+\setmonofont{Droid Sans Mono}
+
+\usepackage{ucs}
+\usepackage{graphicx}
+\usepackage{amstext, amsmath}
+\usepackage{cmap} % чтобы был поиск по pdf
+\usepackage{textcomp}
+\usepackage{multicol}
+\usepackage{hyperref}
+\usepackage{setspace}
+\usepackage[usenames,dvipsnames]{color} % для source-highlight
+\usepackage{indentfirst}
+\usepackage{clrscode}
+\usepackage{longtable}
+\usepackage{float} % \begin{figure}[H]
+
+% меняем размеры страницы
+\usepackage{geometry}
+\geometry{left=1.0cm}
+\geometry{right=1.0cm}
+\geometry{top=1.0cm}
+\geometry{bottom=2.0cm}
+
+\newcommand{\normalize}{\mathrm{normalize}}
+
+% переопределяем окружение verbatim
+\makeatletter 
+\renewcommand*\verbatim@font{% 
+\normalfont\ttfamily\small 
+\hyphenchar\font\m@ne 
+\let\do\do@noligs \verbatim@nolig@list 
+} 
+\makeatother 
+
+%\end{verbatim}
+
+% отступ при наборе формул в блоке multline
+\multlinegap=2cm
+
+% будем считать что переполнения не было, если строка вышла за границу не более чем 0.01pt
+\hfuzz=0.01pt
+
+% разрешаю увеличить расстояние между словами не больше чем на 14pt, что бы не было переполнения
+\emergencystretch=14pt
+
+% изменение межстрочного интервала
+\def\heightline{1.0}
+\linespread{\heightline} % 1.3 - это полуторный
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% добавляем точки в Оглавление
+
+\renewcommand{\thesection}{\arabic{section}.} 
+\renewcommand{\thesubsection}{\arabic{section}.\arabic{subsection}.} 
+\renewcommand{\thesubsubsection}{\arabic{section}.\arabic{subsection}.\arabic{subsubsection}.} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% определим новые команды
+
+\newcommand{\HRule}{\noindent\rule{\linewidth}{0.35mm}}
+\def\cf#1{\texttt{\small #1}}
+
+\newcounter{sourcecode}
+\setcounter{sourcecode}{0}
+\newcommand*{\cppsource}[2]{\refstepcounter{sourcecode} \par{\HRule \small \tt \bf \noindent \ Листинг \arabic{sourcecode}. {\rm \small #2} \vspace{0.25cm}}%
+\input{#1} \HRule}
+
+\makeindex
+
+\begin{document}
+
+\begin{titlepage}
+\begin{center}
+{
+    bf \Large \textsf{ xvid vs x264/5 vs webm(vp8) }
+}
+
+\end{center}
+\vspace{3em}
+
+\vfill 
+\begin{center} 
+{\rm Нижний Новгород, \\ 2013 г.} 
+\end {center} 
+\end{titlepage} 
+
+\tableofcontents
+
+\newpage
+\section*{Введение}
+\addcontentsline{toc}{section}{Введение} 
+
+\newpage 
+\newpage 
+
+\newpage
+\section*{Заключение}
+\addcontentsline{toc}{section}{Заключение} 
+
+\end{document}
