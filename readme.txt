@@ -1,7 +1,7 @@
 
 Usage: 
 
-$ ./matrix_image -i=/home/aod314/work/PNG/big_buck_bunny_0%4d.png -o=img -s=7580 -c=4
+$ ./matrix_image -i=big_buck_bunny_0%4d.png -o=img -s=7580 -c=4
 $ ls *.png
 img_00000000.png  img_00000001.png  img_00000002.png  img_00000003.png
 
@@ -15,80 +15,101 @@ img_00000000.png  img_00000001.png  img_00000002.png  img_00000003.png
 // first version
 $ ./convert 
 
-time encode(sec):   1.3443
-time decode(sec):   0.4257
+image orig: img_00000000.png
+image save: img_00000000.png.png(100)
+time encode(sec):   5.9719
+time decode(sec):   1.7873
 PSNR            : 361.2020
-size orig       :   14198976 bytes ~    13.5412 Mb
-size save       :   14198976 bytes ~    13.5412 Mb
+size orig       :   59766782 bytes ~    56.9980 Mb
+size save       :   59766782 bytes ~    56.9980 Mb
 save/orig       : 1.0000
 
-time encode(sec):   0.2290
-time decode(sec):   0.1641
-PSNR            :  50.0386
-size orig       :   14198976 bytes ~    13.5412 Mb
-size save       :    6595904 bytes ~     6.2903 Mb
-save/orig       : 0.4645
+image orig: img_00000000.png
+image save: img_00000000.png.100.jpg(100)
+time encode(sec):   0.9280
+time decode(sec):   0.6629
+PSNR            :  41.3001
+size orig       :   59766782 bytes ~    56.9980 Mb
+size save       :   27998038 bytes ~    26.7010 Mb
+save/orig       : 0.4685
 
-time encode(sec):   0.1065
-time decode(sec):   0.0964
-PSNR            :  47.2395
-size orig       :   14198976 bytes ~    13.5412 Mb
-size save       :    1543676 bytes ~     1.4722 Mb
-save/orig       : 0.1087
+image orig: img_00000000.png
+image save: img_00000000.png.90.jpg(90)
+time encode(sec):   0.4690
+time decode(sec):   0.4047
+PSNR            :  38.8306
+size orig       :   59766782 bytes ~    56.9980 Mb
+size save       :    6756668 bytes ~     6.4437 Mb
+save/orig       : 0.1131
 
-time encode(sec):   0.0974
-time decode(sec):   0.0891
-PSNR            :  45.4118
-size orig       :   14198976 bytes ~    13.5412 Mb
-size save       :    1004779 bytes ~     0.9582 Mb
-save/orig       : 0.0708
+image orig: img_00000000.png
+image save: img_00000000.png.80.jpg(80)
+time encode(sec):   0.4396
+time decode(sec):   0.3676
+PSNR            :  37.0142
+size orig       :   59766782 bytes ~    56.9980 Mb
+size save       :    4574338 bytes ~     4.3624 Mb
+save/orig       : 0.0765
 
-time encode(sec):   0.0952
-time decode(sec):   0.0849
-PSNR            :  43.9898
-size orig       :   14198976 bytes ~    13.5412 Mb
-size save       :     793028 bytes ~     0.7563 Mb
-save/orig       : 0.0559
+image orig: img_00000000.png
+image save: img_00000000.png.70.jpg(70)
+time encode(sec):   0.4102
+time decode(sec):   0.3555
+PSNR            :  36.0590
+size orig       :   59766782 bytes ~    56.9980 Mb
+size save       :    3727115 bytes ~     3.5545 Mb
+save/orig       : 0.0624
 
-time encode(sec):   0.0924
-time decode(sec):   0.0825
-PSNR            :  42.7642
-size orig       :   14198976 bytes ~    13.5412 Mb
-size save       :     671953 bytes ~     0.6408 Mb
-save/orig       : 0.0473
+image orig: img_00000000.png
+image save: img_00000000.png.60.jpg(60)
+time encode(sec):   0.4011
+time decode(sec):   0.3482
+PSNR            :  35.4084
+size orig       :   59766782 bytes ~    56.9980 Mb
+size save       :    3231268 bytes ~     3.0816 Mb
+save/orig       : 0.0541
 
-time encode(sec):   0.0903
-time decode(sec):   0.0816
-PSNR            :  42.0318
-size orig       :   14198976 bytes ~    13.5412 Mb
-size save       :     599251 bytes ~     0.5715 Mb
-save/orig       : 0.0422
+image orig: img_00000000.png
+image save: img_00000000.png.50.jpg(50)
+time encode(sec):   0.3966
+time decode(sec):   0.3434
+PSNR            :  34.9236
+size orig       :   59766782 bytes ~    56.9980 Mb
+size save       :    2910389 bytes ~     2.7756 Mb
+save/orig       : 0.0487
 
-time encode(sec):   0.0896
-time decode(sec):   0.0795
-PSNR            :  41.0204
-size orig       :   14198976 bytes ~    13.5412 Mb
-size save       :     532572 bytes ~     0.5079 Mb
-save/orig       : 0.0375
+image orig: img_00000000.png
+image save: img_00000000.png.40.jpg(40)
+time encode(sec):   0.3894
+time decode(sec):   0.3393
+PSNR            :  34.4037
+size orig       :   59766782 bytes ~    56.9980 Mb
+size save       :    2616690 bytes ~     2.4955 Mb
+save/orig       : 0.0438
 
-time encode(sec):   0.0890
-time decode(sec):   0.0783
-PSNR            :  39.5031
-size orig       :   14198976 bytes ~    13.5412 Mb
-size save       :     467425 bytes ~     0.4458 Mb
-save/orig       : 0.0329
+image orig: img_00000000.png
+image save: img_00000000.png.30.jpg(30)
+time encode(sec):   0.3832
+time decode(sec):   0.3327
+PSNR            :  33.6290
+size orig       :   59766782 bytes ~    56.9980 Mb
+size save       :    2309108 bytes ~     2.2021 Mb
+save/orig       : 0.0386
 
-time encode(sec):   0.0867
-time decode(sec):   0.0760
-PSNR            :  37.1326
-size orig       :   14198976 bytes ~    13.5412 Mb
-size save       :     397540 bytes ~     0.3791 Mb
-save/orig       : 0.0280
+image orig: img_00000000.png
+image save: img_00000000.png.20.jpg(20)
+time encode(sec):   0.3753
+time decode(sec):   0.3269
+PSNR            :  32.4588
+size orig       :   59766782 bytes ~    56.9980 Mb
+size save       :    1940002 bytes ~     1.8501 Mb
+save/orig       : 0.0325
 
-time encode(sec):   0.0873
-time decode(sec):   0.0734
-PSNR            :  32.8207
-size orig       :   14198976 bytes ~    13.5412 Mb
-size save       :     322724 bytes ~     0.3078 Mb
-save/orig       : 0.0227
-
+image orig: img_00000000.png
+image save: img_00000000.png.10.jpg(10)
+time encode(sec):   0.3676
+time decode(sec):   0.3188
+PSNR            :  29.7705
+size orig       :   59766782 bytes ~    56.9980 Mb
+size save       :    1503802 bytes ~     1.4341 Mb
+save/orig       : 0.0252

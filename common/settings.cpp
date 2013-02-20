@@ -7,7 +7,7 @@ const char * keys =
     "{      |  help  |  false      |  help info                                }"
     "{   i  |        | img_%8d.png |  input                                    }"
     "{   o  |        | img         |  output                                   }"
-    "{   c  |        |      4      |  count                                    }"
+    "{   c  |        |      1      |  count                                    }"
     "{   s  |        |      0      |  start                                    }"
     "{   w  |        |   4096      |  width                                    }"
     "{   h  |        |   4096      |  height                                   }"

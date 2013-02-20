@@ -57,7 +57,7 @@ void get_stat(std::string orig, std::string save, int compress)
 
 double get_psnr(cv::Mat img1, cv::Mat img2)
 {
-    cv::PSNR(img1, img2);
+    return cv::PSNR(img1, img2);
 }
 
 size_t get_filesize(std::string name)
