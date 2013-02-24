@@ -33,8 +33,20 @@ void save_image(std::string name, cv::Mat img, int compress)
         cv::imwrite(name, img, compression_params);
     }
     else if (ext.compare("webp") == 0)
-    {
-        throw std::string("not implemented");
+    {        
+        std::vector<int> compression_params;
+        compression_params.push_back(CV_IMWRITE_WEBP_QUALITY);
+        compression_params.push_back(compress);
+
+        if (compress == -1)
+        {
+            cv::imwrite(name, img);
+        }
+        else
+        {
+            cv::imwrite(name, img, compression_params);
+        }
+
     }
 }
 
@@ -61,7 +73,18 @@ void Saver::save(cv::Mat img, int compress, size_t index)
 	}
 	else if (t == WEBP)
 	{
-		throw std::string("not implemented");
+        std::vector<int> compression_params;
+        compression_params.push_back(CV_IMWRITE_WEBP_QUALITY);
+        compression_params.push_back(compress);
+
+        if (compress == -1)
+        {
+            cv::imwrite(get_full_name, img);
+        }
+        else
+        {
+            cv::imwrite(get_full_name, img, compression_params);
+        }
 	}
 }
 
