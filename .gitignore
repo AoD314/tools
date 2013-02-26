@@ -1,0 +1,13 @@
+.gitignore
+*.out
+*.user
+*.un~
+*.png
+*.log
+*.mp4
+*.mkv
+*.pdf
+*.aux
+*.idx
+*.gz
+*.toc
