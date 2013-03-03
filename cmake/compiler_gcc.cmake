@@ -6,10 +6,6 @@ if(CXX_GCC)
     string(REGEX REPLACE ".* ([0-9]\\.[0-9]\\.[0-9]) .*" "\\1" gcc_compiler_version ${_compiler_output})
     message(STATUS "C++ compiler version: ${gcc_compiler_version} [${CMAKE_CXX_COMPILER}]")
 
-    if(gcc_compiler_version VERSION_LESS "4.7.1")
-        message(WARNING "need gcc version >=4.7.1")
-    endif()
-
     if(${ENABLE_WARNINGS_ARE_ERRORS})
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 ")
         set(CMAKE_C_FLAGS     "${CMAKE_C_FLAGS} -std=c++11 ")

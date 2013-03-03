@@ -4,16 +4,16 @@
 
 const char * keys =
 {
-    "{      |  help  |  false      |  help info                                }"
-    "{   i  |        | img_%8d.png |  input                                    }"
-    "{   o  |        | img         |  output                                   }"
-    "{   c  |        |      1      |  count                                    }"
-    "{   s  |        |      0      |  start                                    }"
-    "{   w  |        |   4096      |  width                                    }"
-    "{   h  |        |   4096      |  height                                   }"
-    "{   b  |        |     -1      |  bitrate                                  }"
-    "{   t  |        |      4      |  threads count                            }"
-    "{   f  |        |   30.0      |  fps                                      }"
+    "{  help      |  false      |  help info           }"
+    "{  i input   | img_%8d.png |  input               }"
+    "{  o output  | img         |  output              }"
+    "{  c count   |      1      |  count               }"
+    "{  s start   |      0      |  start               }"
+    "{  w width   |   4096      |  width               }"
+    "{  h height  |   4096      |  height              }"
+    "{  b bitrate |     -1      |  bitrate             }"
+    "{  t threads |      4      |  threads count       }"
+    "{  f fps     |   30.0      |  fps                 }"
 };
 
 Settings::Settings(int argc, char ** argv)
@@ -44,7 +44,7 @@ Settings::Settings(int argc, char ** argv)
     if (parser.get<bool>("help"))
     {
         is_exit = true;
-        parser.printParams();
+        parser.printMessage();
     }
     else
     {
@@ -69,9 +69,3 @@ void print_progress(int i, int count)
     std::cout << cv::format("[%5d/%5d] (%5d)", i, count, count - i);
     std::cout << std::endl;
 }
-
-
-
-
-
-

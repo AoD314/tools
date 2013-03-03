@@ -79,11 +79,11 @@ void Saver::save(cv::Mat img, int compress, size_t index)
 
         if (compress == -1)
         {
-            cv::imwrite(get_full_name, img);
+            cv::imwrite(get_full_name(), img);
         }
         else
         {
-            cv::imwrite(get_full_name, img, compression_params);
+            cv::imwrite(get_full_name(), img, compression_params);
         }
 	}
 }

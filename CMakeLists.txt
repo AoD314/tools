@@ -4,7 +4,7 @@ include(cmake/general.cmake)
 
 set_solution("tools")
 
-set_dependency("opencv" "webp")
+set_dependency("opencv")
 
 add_subdirectory(matrix_image)
 
