@@ -17,13 +17,13 @@ def create_cmd(fps, codec, bitrate, output):
     input = "-i big_buck_bunny_052%02d.png "
 
     f = " -r {0}".format(fps)
-    
-    c = " -codec:v "
-    if (codec == "XVID"): c += "libxvid "
+
+    c = " -vcodec "
+    if (codec == "XVID"): c += "libxvid -aspect 16:9"
     if (codec == "H264"): c += "libx264 "
-    
-    b = " -b:v {0}".format(bitrate)
-    
+
+    b = " -b {0}".format(bitrate)
+
     return input + "{0} {1} {2} {3}".format(f, c, b, output)
 
 def run_ffmpeg(cmd):
@@ -35,15 +35,21 @@ def run_ffmpeg(cmd):
 
 def main():
     parser = argparse.ArgumentParser(description='create video with FFmpeg.')
-    parser.add_argument('-f', '--fps', type=float, default=30.0, help='set fps for creating video')
-    parser.add_argument('-o', '--output', type=str, default="output.mp4", help='set name of output video file')
-    parser.add_argument('-b', '--bitrate', type=str, default="8500k", help='set bitrate for output video file')
-    parser.add_argument('-c', '--codec', choices=['XVID', 'H264', 'WebM'], default='XVID', help='set fps for creating video')
+    parser.add_argument('-f', '--fps', type=float, default=30.0,
+                        help='set fps for creating video')
+    parser.add_argument('-o', '--output', type=str, default="output.mp4",
+                        help='set name of output video file')
+    parser.add_argument('-b', '--bitrate', type=str, default="8500k",
+                        help='set bitrate for output video file')
+    parser.add_argument('-c', '--codec', choices=['XVID', 'H264', 'WebM'],
+                        default='XVID', help='set fps for creating video')
     args = parser.parse_args()
 
     run_ffmpeg(" -version")
-    run_ffmpeg(create_cmd(args.fps, args.codec, args.bitrate, args.output) + " -pass 1 -an -y ")
-    run_ffmpeg(create_cmd(args.fps, args.codec, args.bitrate, args.output) + " -pass 2 -y ")
+    run_ffmpeg(create_cmd(args.fps, args.codec, args.bitrate, args.output) + \
+               " -pass 1 -an -y ")
+    run_ffmpeg(create_cmd(args.fps, args.codec, args.bitrate, \
+               '2' + args.output) + " -pass 2 -y ")
     pass
 
 if __name__ == "__main__":
