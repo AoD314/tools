@@ -23,7 +23,6 @@ void get_stat(std::string orig, std::string save, int compress)
 
     timer.stop();
 
-
     float t = timer.getTimeSec() / static_cast<float>(count_repeat);
     std::cout << cv::format("time encode(sec): %8.4f", t) << std::endl;
     timer.reset();
@@ -45,13 +44,13 @@ void get_stat(std::string orig, std::string save, int compress)
     std::cout << cv::format("PSNR            : %8.4f", psnr) << std::endl;
 
     size_t or_b = get_filesize(orig);
-    float  or_m = static_cast<float>(or_b) / (1024.0 * 1024.0);
+    float  or_k = static_cast<float>(or_b) / (1024.0);
     size_t sv_b = get_filesize(save);
-    float  sv_m = static_cast<float>(sv_b) / (1024.0 * 1024.0);
+    float  sv_k = static_cast<float>(sv_b) / (1024.0);
 
-    std::cout << cv::format("size orig       : %10d bytes ~ %10.4f Mb", or_b, or_m) << std::endl;
-    std::cout << cv::format("size save       : %10d bytes ~ %10.4f Mb", sv_b, sv_m) << std::endl;
-    std::cout << cv::format("save/orig       : %6.4f", sv_m/or_m) << std::endl << std::endl;;
+    std::cout << cv::format("size orig       : %10d bytes ~ %10.2f Kb", or_b, or_k) << std::endl;
+    std::cout << cv::format("size save       : %10d bytes ~ %10.2f Kb", sv_b, sv_k) << std::endl;
+    std::cout << cv::format("save/orig       : %6.4f", sv_k/or_k) << std::endl << std::endl;;
 
 }
 

@@ -5,7 +5,7 @@
 const char * keys =
 {
     "{  help      |  false      |  help info           }"
-    "{  i input   | img_%8d.png |  input               }"
+    "{  i input   | 0005.png    |  input               }"
     "{  o output  | img         |  output              }"
     "{  c count   |      1      |  count               }"
     "{  s start   |      0      |  start               }"

@@ -25,7 +25,9 @@ void save_image(std::string name, cv::Mat img, int compress)
         compression_params.push_back(9);
         cv::imwrite(name, img, compression_params);
     }
-    else if (ext.compare("jpg") == 0 || ext.compare("jpeg") == 0)
+    else if (ext.compare("jpg") == 0  ||
+             ext.compare("jpeg") == 0 ||
+             ext.compare("jp2") == 0)
     {
         std::vector<int> compression_params;
         compression_params.push_back(CV_IMWRITE_JPEG_QUALITY);
@@ -37,16 +39,7 @@ void save_image(std::string name, cv::Mat img, int compress)
         std::vector<int> compression_params;
         compression_params.push_back(CV_IMWRITE_WEBP_QUALITY);
         compression_params.push_back(compress);
-
-        if (compress == -1)
-        {
-            cv::imwrite(name, img);
-        }
-        else
-        {
-            cv::imwrite(name, img, compression_params);
-        }
-
+        cv::imwrite(name, img, compression_params);
     }
 }
 
@@ -57,34 +50,6 @@ void Saver::save(cv::Mat img, int compress, size_t index)
         idx = index;
     }
 
-	if (t == PNG)
-	{
-		std::vector<int> compression_params;
-		compression_params.push_back(CV_IMWRITE_PNG_COMPRESSION);
-		compression_params.push_back(9);
-		cv::imwrite(get_full_name(), img, compression_params);
-	}
-	else if (t == JPEG)
-	{
-		std::vector<int> compression_params;
-		compression_params.push_back(CV_IMWRITE_JPEG_QUALITY);
-        compression_params.push_back(compress);
-		cv::imwrite(get_full_name(), img, compression_params);
-	}
-	else if (t == WEBP)
-	{
-        std::vector<int> compression_params;
-        compression_params.push_back(CV_IMWRITE_WEBP_QUALITY);
-        compression_params.push_back(compress);
-
-        if (compress == -1)
-        {
-            cv::imwrite(get_full_name(), img);
-        }
-        else
-        {
-            cv::imwrite(get_full_name(), img, compression_params);
-        }
-	}
+    save_image(get_full_name(), img, compress);
 }
 
