@@ -22,7 +22,7 @@ void save_image(std::string name, cv::Mat img, int compress)
     {
         std::vector<int> compression_params;
         compression_params.push_back(CV_IMWRITE_PNG_COMPRESSION);
-        compression_params.push_back(9);
+        compression_params.push_back(compress);
         cv::imwrite(name, img, compression_params);
     }
     else if (ext.compare("jpg") == 0  ||

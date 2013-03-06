@@ -24,7 +24,7 @@ void get_stat(std::string orig, std::string save, int compress)
     timer.stop();
 
     float t = timer.getTimeSec() / static_cast<float>(count_repeat);
-    std::cout << cv::format("time encode(sec): %8.4f", t) << std::endl;
+    std::cout << cv::format("time encode(sec): %8.5f", t) << std::endl;
     timer.reset();
 
 
@@ -38,10 +38,10 @@ void get_stat(std::string orig, std::string save, int compress)
     timer.stop();
 
     t = timer.getTimeSec() / static_cast<float>(count_repeat);
-    std::cout << cv::format("time decode(sec): %8.4f", t) << std::endl;
+    std::cout << cv::format("time decode(sec): %8.5f", t) << std::endl;
 
     double psnr = get_psnr(mat_orig, mat_save);
-    std::cout << cv::format("PSNR            : %8.4f", psnr) << std::endl;
+    std::cout << cv::format("PSNR            : %8.5f", psnr) << std::endl;
 
     size_t or_b = get_filesize(orig);
     float  or_k = static_cast<float>(or_b) / (1024.0);
@@ -50,7 +50,7 @@ void get_stat(std::string orig, std::string save, int compress)
 
     std::cout << cv::format("size orig       : %10d bytes ~ %10.2f Kb", or_b, or_k) << std::endl;
     std::cout << cv::format("size save       : %10d bytes ~ %10.2f Kb", sv_b, sv_k) << std::endl;
-    std::cout << cv::format("save/orig       : %6.4f", sv_k/or_k) << std::endl << std::endl;;
+    std::cout << cv::format("save/orig       : %6.2f times", or_k/sv_k) << std::endl << std::endl;;
 
 }
 

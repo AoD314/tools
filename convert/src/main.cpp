@@ -9,12 +9,12 @@ int main(int argc, char ** argv)
     Settings settings(argc, argv);
     if (settings.is_exit) return 0;
 
-    std::string input  = "0005.png"; //settings.input;
+    std::string input  = settings.input;
     std::string output = "";
 
     for(int q = 0; q < 10; q++)
     {
-        output = input + ".png";
+        output = input + cv::format(".compress_.%d.png", q);
         get_stat(input, output, q);
     }
 
@@ -24,11 +24,13 @@ int main(int argc, char ** argv)
         get_stat(input, output, q);
     }
 
+    /*
     for(int q = 50; q <= 100; q+=5)
     {
         output = input + cv::format(".quality_.%03d.jp2", q);
         get_stat(input, output, q);
     }
+    */
 
     for(int q = 50; q <= 105; q+=5)
     {
