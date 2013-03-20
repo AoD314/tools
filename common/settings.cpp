@@ -49,6 +49,7 @@ Settings::Settings(int argc, char ** argv)
     else
     {
         // print stat
+        /*
         std::cout << "STAT:" << std::endl;
         std::cout << "input     : " << input   << std::endl;
         std::cout << "output    : " << output  << std::endl;
@@ -57,6 +58,7 @@ Settings::Settings(int argc, char ** argv)
         std::cout << "bitrate   : " << bitrate << std::endl;
         std::cout << "threads   : " << threads << std::endl;
         std::cout << "fps       : " << fps     << std::endl;
+        */
     }
 
 }
@@ -65,7 +67,7 @@ void print_progress(int i, int count)
 {
     i++;
     float pr = 100.0f * i / static_cast<float>(count);
-    std::cout << cv::format("progress : %6.2f", pr) << "%";
-    std::cout << cv::format("[%5d/%5d] (%5d)", i, count, count - i);
+    std::cout << cv::format("progress : %6.2f    ", pr) << "%";
+    std::cout << cv::format("[%6d / %6d]    (%6d)", i, count, count - i);
     std::cout << std::endl;
 }

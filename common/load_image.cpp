@@ -9,7 +9,8 @@ Loader::Loader(std::string name, int start_index)
 
 std::string Loader::get_full_name()
 {
-    return cv::format(filename.c_str(), idx++);
+    std::string name = cv::format(filename.c_str(), idx++);
+    return name;
 }
 
 cv::Mat Loader::load(size_t index)

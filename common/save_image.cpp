@@ -12,7 +12,9 @@ std::string Saver::get_full_name()
 	if (t == JPEG) ext = "jpeg";
 	if (t == WEBP) ext = "webp";
 
-    return cv::format("%s_%08d.%s", filename.c_str(), idx++, ext.c_str());
+    std::string name = cv::format(filename.c_str(), idx++);
+
+    return name;
 }
 
 void save_image(std::string name, cv::Mat img, int compress)

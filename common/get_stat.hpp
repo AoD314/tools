@@ -5,11 +5,9 @@
 #include <string>
 #include <opencv2/opencv.hpp>
 
-const int count_repeat = 15;
+const int count_repeat = 25;
 
 void get_stat(std::string orig, std::string save, int compress = 100);
-
-double get_psnr(cv::Mat img1, cv::Mat img2);
 
 size_t get_filesize(std::string name);
 

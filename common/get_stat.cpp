@@ -9,10 +9,8 @@ void get_stat(std::string orig, std::string save, int compress)
 {
     cv::Mat mat_save;
     cv::Mat mat_orig = cv::imread(orig);
+    double time_enc, time_dec;
     cv::TickMeter timer;
-
-    std::cout << cv::format("image orig: %s", orig.c_str()) << std::endl;
-    std::cout << cv::format("image save: %s(%d)", save.c_str(), compress) << std::endl;
 
     timer.start();
 
@@ -23,8 +21,8 @@ void get_stat(std::string orig, std::string save, int compress)
 
     timer.stop();
 
-    float t = timer.getTimeSec() / static_cast<float>(count_repeat);
-    std::cout << cv::format("time encode(sec): %8.5f", t) << std::endl;
+
+    time_enc = timer.getTimeMilli() / static_cast<double>(count_repeat);
     timer.reset();
 
 
@@ -37,26 +35,23 @@ void get_stat(std::string orig, std::string save, int compress)
 
     timer.stop();
 
-    t = timer.getTimeSec() / static_cast<float>(count_repeat);
-    std::cout << cv::format("time decode(sec): %8.5f", t) << std::endl;
+    time_dec = timer.getTimeMilli() / static_cast<double>(count_repeat);
 
-    double psnr = get_psnr(mat_orig, mat_save);
-    std::cout << cv::format("PSNR            : %8.5f", psnr) << std::endl;
+    double psnr = cv::PSNR(mat_orig, mat_save);
 
-    size_t or_b = get_filesize(orig);
-    float  or_k = static_cast<float>(or_b) / (1024.0);
-    size_t sv_b = get_filesize(save);
-    float  sv_k = static_cast<float>(sv_b) / (1024.0);
+    double save_size = static_cast<double>(get_filesize(save)) / (1024.0);
 
-    std::cout << cv::format("size orig       : %10d bytes ~ %10.2f Kb", or_b, or_k) << std::endl;
-    std::cout << cv::format("size save       : %10d bytes ~ %10.2f Kb", sv_b, sv_k) << std::endl;
-    std::cout << cv::format("save/orig       : %6.2f times", or_k/sv_k) << std::endl << std::endl;;
+    std::cout << "{" << std::endl;
 
-}
+    std::cout << cv::format("format        :%s;\n", save.substr(save.find_last_of('.')).c_str());
+    std::cout << cv::format("params        :%d;\n", compress);
+    std::cout << cv::format("cmpr size(Kb) :%.8f;\n", save_size);
+    std::cout << cv::format("enc  time(ms) :%.8f;\n", time_enc);
+    std::cout << cv::format("dec  time(ms) :%.8f;\n", time_dec);
+    std::cout << cv::format("PSNR          :%.8f;\n", psnr);
 
-double get_psnr(cv::Mat img1, cv::Mat img2)
-{
-    return cv::PSNR(img1, img2);
+    std::cout << "}" << std::endl;
+
 }
 
 size_t get_filesize(std::string name)
