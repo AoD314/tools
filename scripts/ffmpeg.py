@@ -17,18 +17,20 @@ def create_cmd(fps, codec, bitrate, output):
     f = " -r {0}".format(fps)
 
     c = " -codec:v "
-    if (codec == "XVID"): c += "libxvid "
-    if (codec == "H264"): c += "libx264 "
+    if (codec == "XVID"): c += "libxvid -q:v 4 -qp 1 -vtag xvid "
+    if (codec == "H264"): c += "libx264 -preset placebo "
+    if (codec == "WebM"): c += "libvpx -deadline best -crf 2 -cpu-used 0 -f webm -qmax=63 -qmin=0 "
 
     b = " -b:v {0}".format(bitrate)
 
-    return input + "{0} {1} {2} {3} -threads 12 ".format(f, c, b, output)
+    return input + "{0} {1} {2} {3} -threads 8 -stats ".format(f, c, b, output)
 
-def run_ffmpeg(cmd):
+def run_ffmpeg(cmd, only_print):
     start = time.time()
-    print("\nRUN : ffmpeg " + cmd + '\n')
-    #subprocess.getoutput('ffmpeg ' + cmd)
-    os.system('ffmpeg ' + cmd)
+    print("\nffmpeg " + cmd + '\n')
+    if only_print == False:
+        #subprocess.getoutput('ffmpeg ' + cmd)
+        os.system('ffmpeg ' + cmd)
     finish = time.time()
     print_time(finish - start)
 
@@ -38,15 +40,16 @@ def main():
                         help='set fps for creating video')
     parser.add_argument('-o', '--output', type=str, default="output.mkv",
                         help='set name of output video file')
-    parser.add_argument('-b', '--bitrate', type=str, default="15000k",
+    parser.add_argument('-b', '--bitrate', type=str, default="15M",
                         help='set bitrate for output video file')
     parser.add_argument('-c', '--codec', choices=['XVID', 'H264', 'WebM'],
                         default='H264', help='set fps for creating video')
+    parser.add_argument('-n', type=bool, default=False, help='print cmd donnt run')
     args = parser.parse_args()
 
-    run_ffmpeg(" -version")
-    run_ffmpeg(create_cmd(args.fps, args.codec, args.bitrate, args.output) + " -pass 1 -an -y ")
-    run_ffmpeg(create_cmd(args.fps, args.codec, args.bitrate, args.output) + " -pass 2 -y ")
+    run_ffmpeg(" -version", False)
+    run_ffmpeg(create_cmd(args.fps, args.codec, args.bitrate, args.output) + " -pass 1 -an -y /dev/null ", args.n)
+    run_ffmpeg(create_cmd(args.fps, args.codec, args.bitrate, args.output) + " -pass 2 -y ", args.n)
     pass
 
 if __name__ == "__main__":
