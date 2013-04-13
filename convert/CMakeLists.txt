@@ -1,3 +1,2 @@
-cmake_minimum_required(VERSION 2.8.10)
 
-add_application("convert" "src" "../common")
+add_app("convert" "src" "../common")

@@ -2,7 +2,7 @@
 #ifndef __matrix_resize_hpp__
 #define __matrix_resize_hpp__
 
-#include <opencv2/opencv.hpp>
+#include <opencv2/core.hpp>
 
 cv::Mat matrix_resize(cv::Mat orig, int w, int h);
 

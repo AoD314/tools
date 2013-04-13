@@ -1,5 +1,5 @@
 
-#include <opencv2/opencv.hpp>
+#include <opencv2/core.hpp>
 
 #include "load_image.hpp"
 #include "save_image.hpp"

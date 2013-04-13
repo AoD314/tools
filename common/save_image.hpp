@@ -2,7 +2,7 @@
 #ifndef __save_image_hpp__
 #define __save_image_hpp__
 
-#include <opencv2/opencv.hpp>
+#include <opencv2/core.hpp>
 
 enum IMAGE_TYPE
 {

@@ -1,19 +1,20 @@
 
+#include <iostream>
 #include "settings.hpp"
-#include <opencv2/opencv.hpp>
+#include "opencv2/core.hpp"
 
-const char * keys =
+const std::string keys =
 {
-    "{  help      |  false      |  help info           }"
-    "{  i input   | 0005.png    |  input               }"
-    "{  o output  | img         |  output              }"
-    "{  c count   |      1      |  count               }"
-    "{  s start   |      0      |  start               }"
-    "{  w width   |   4096      |  width               }"
-    "{  h height  |   4096      |  height              }"
-    "{  b bitrate |     -1      |  bitrate             }"
-    "{  t threads |      4      |  threads count       }"
-    "{  f fps     |   30.0      |  fps                 }"
+    "{     help    |  false      |  help info           }"
+    "{  i  input   | 0005.png    |  input               }"
+    "{  o  output  | img         |  output              }"
+    "{  c  count   |      1      |  count               }"
+    "{  s  start   |      0      |  start               }"
+    "{  w  width   |   4096      |  width               }"
+    "{  h  height  |   4096      |  height              }"
+    "{  b  bitrate |     -1      |  bitrate             }"
+    "{  t  threads |      4      |  threads count       }"
+    "{  f  fps     |   30.0      |  fps                 }"
 };
 
 Settings::Settings(int argc, char ** argv)
@@ -22,8 +23,18 @@ Settings::Settings(int argc, char ** argv)
 
     cv::CommandLineParser parser(argc, argv, keys);
 
-    width   = parser.get<int>("w");
-    height  = parser.get<int>("h");
+    fps      = parser.get<float>("f");
+
+    width    = parser.get<int>("w");
+    height   = parser.get<int>("h");
+
+    threads  = parser.get<int>("t");
+
+    input    = parser.get<std::string>("i");
+    output   = parser.get<std::string>("o");
+    count    = parser.get<int>("c");
+    start    = parser.get<int>("s");
+
     bitrate = parser.get<unsigned int>("b");
     if (bitrate == -1)
     {
@@ -32,16 +43,8 @@ Settings::Settings(int argc, char ** argv)
                     static_cast<float>(height) * 2.0 / 1024.0 * fps );
     }
 
-    threads  = parser.get<int>("t");
-    fps      = parser.get<float>("f");
-
-    input    = parser.get<std::string>("i");
-    output   = parser.get<std::string>("o");
-    count    = parser.get<int>("c");
-    start    = parser.get<int>("s");
-
     // check error
-    if (parser.get<bool>("help"))
+    if (parser.has("help"))
     {
         is_exit = true;
         parser.printMessage();

@@ -1,16 +1,16 @@
 
-macro(set_dependency)
-
+macro(clear_dependency)
   unset(target_global_list_libs)
   set(target_global_list_libs)
-  
+endmacro()
+
+macro(add_dependency)
   set(target_use_qt FALSE)
   
   foreach(arg ${ARGV})
     if (arg STREQUAL "opencv")
       find_package(OpenCV REQUIRED)
       list(APPEND target_global_list_libs ${OpenCV_LIBS})
-
 
     elseif(arg STREQUAL "ffmpeg")
       find_package(FFMPEG REQUIRED)
@@ -31,6 +31,9 @@ macro(set_dependency)
       find_package(WebP REQUIRED)
       list(APPEND target_global_list_libs ${WEBP_LIBRARIES})
 
+    elseif(arg STREQUAL "mlib")
+      find_package(mlib REQUIRED)
+      list(APPEND target_global_list_libs ${MLIB_LIBS})
 
     elseif(arg STREQUAL "sdl")
       find_package(SDL REQUIRED)

@@ -1,5 +1,8 @@
 
 #include "save_image.hpp"
+#include "opencv2/highgui.hpp"
+
+using namespace cv;
 
 Saver::Saver(std::string name, IMAGE_TYPE type):
     t(type), filename(name), idx(0) { }
@@ -42,6 +45,10 @@ void save_image(std::string name, cv::Mat img, int compress)
         compression_params.push_back(CV_IMWRITE_WEBP_QUALITY);
         compression_params.push_back(compress);
         cv::imwrite(name, img, compression_params);
+    }
+    else
+    {
+        cv::imwrite(name, img);
     }
 }
 

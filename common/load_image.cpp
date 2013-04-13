@@ -1,5 +1,6 @@
 
 #include "load_image.hpp"
+#include "opencv2/highgui.hpp"
 
 Loader::Loader(std::string name, int start_index)
 {
