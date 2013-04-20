@@ -10,7 +10,7 @@ def run_experiments():
     f.close()    
     return text
    
-def prase_output(out):
+def prase_all_output(out):
     list = out.split('}\n{')
     os = list[0].split('\n')
 
@@ -44,39 +44,45 @@ def prase_output(out):
 
     return t
 
-def draw_plt(t):
+def draw_plt(y, x, yt, xt, t, leg):
+    """ amount of draw < 9 """
+    colors = ['#ff0000','#00ff00','#0000ff','#ffff00','#ff00ff','#00ffff','#ff8000','#000000','#c0c0c0']
     fig = plt.figure()
-    ax = plt.subplot(111)#, sharex='all', sharey='all')
+    plt.ylabel(yt)
+    plt.xlabel(xt)
+    plt.title(t)
 
-    width = 0.35
-    i = 0
-    step  = 0.0
+    n = len(y) / len(x)
 
-    colors = ['r', 'g', 'b']
+    width = 0.5 / float(n)
     
-    for f in ['.jpeg', 'png', '.webp']:
-        x = []
-        y = []
-        for d in t:
-            if (d['format'] == f):
-                x.append(d['params'])
-                y.append(float(d['psnr']))
+    ind = np.arange(len(x))
+    l = []
+    for i in range(n):
+        l += [plt.bar(ind + i * width, y[i*len(x):(i+1)*len(x)], width, color=colors[i])[0]]
 
-        ind = np.arange(len(x))
-        ax.bar(ind + step, y, width, color=colors[i])
-        step += width
-        i += 1
-     
-    ax.set_xticklabels([str(f) for f in x])
+    lab = [str(i) for i in x]
+    plt.xticks(ind + width * n / 2.0, lab)
+
+    plt.legend(l, leg)
 
     plt.show()
 
 
+
+def grep_data():
+    pass
+
 def main():
     output = run_experiments()
-    table = parse_output(output)
-    draw_plt(table)
+    table = prase_all_output(output)
+
+    draw_plt([33, 44, 55], [100, 90, 80], "y-text", "x-text", 'test #01', ['only-x'])
+    draw_plt([66, 68, 33, 35, 52, 55], [100, 90, 80], "YYY", 'XXX', 'test #02', ['only-x', 'only - y'])
+    x = range(3)
+    y = range(3*9)
+    draw_plt(y, x, "3*9", '3', 'test #03', ['#ff0000','#00ff00','#0000ff','#ffff00','#ff00ff','#00ffff','#ff8000','#000000','#c0c0c0'])
     pass
 
 if __name__ == "__main__":
-    main()
+    main(), '#000000'
