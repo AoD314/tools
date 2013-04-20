@@ -60,22 +60,71 @@ def draw_plt(y, x, yt, xt, t, leg):
     lab = [str(i) for i in x]
     plt.xticks(ind + width * n / 2.0, lab)
     plt.legend(l, leg)
-    plt.show()
+    plt.savefig(t.replace(' ', '_').replace('(','__').replace(')','__').lower() + '.svg')
+    #plt.show()
 
+def grep_data_by(table, format, params, w, h):
+    l = []
+    for i in table:
+        if format != '*' and i['format'] != format:
+            continue
+        if params != '*' and i['params'] != params:
+            continue
+        if w != '*' and i['w'] != w:
+            continue
+        if h != '*' and i['h'] != h:
+            continue
+        l += [i]
+    return l
 
-def grep_data():
-    pass
+def merge_arr(a1, a2):
+    l = []
+    for i in range(len(a1)):
+        l += [float(a1[i]), float(a2[i])]
+    return l
+
+def get_array_by_table(table, val):
+    a = []
+    for i in table:
+        a += [i[val]]
+    return a
+
 
 def main():
     output = run_experiments()
     table = prase_all_output(output)
 
-    draw_plt([33, 44, 55], [100, 90, 80], "y-text", "x-text", 'test #01', ['only-x'])
-    draw_plt([66, 68, 33, 35, 52, 55], [100, 90, 80], "YYY", 'XXX', 'test #02', ['only-x', 'only - y'])
-    x = range(3)
-    y = range(3*9)
-    draw_plt(y, x, "3*9", '3', 'test #03', ['#ff0000','#00ff00','#0000ff','#ffff00','#ff00ff','#00ffff','#ff8000','#000000','#c0c0c0'])
+    l = grep_data_by(table, '.webp', '*', '4096', '4096')
+    x = get_array_by_table(l, 'params')
+
+
+
+    l = grep_data_by(table, '.webp', '*', '4096', '4096')
+    y_webp = get_array_by_table(l, 'psnr')
+
+    l = grep_data_by(table, '.jpeg', '*', '4096', '4096')
+    y_jpeg = get_array_by_table(l, 'psnr')
+
+    y = merge_arr(y_webp, y_jpeg)
+    
+    draw_plt(y, x, "PSNR", "Quality", 'WebP vs Jpeg (Quality-PSNR)', ['webp', 'jpeg'])
+
+
+    l = grep_data_by(table, '.webp', '*', '4096', '4096')
+    y_webp = get_array_by_table(l, 'cmpr_size')
+
+    l = grep_data_by(table, '.jpeg', '*', '4096', '4096')
+    y_jpeg = get_array_by_table(l, 'cmpr_size')
+
+    y = merge_arr(y_webp, y_jpeg)
+    
+    draw_plt(y, x, "Compression Size(kb)", "Quality", 'WebP vs Jpeg (Quality-Compression Size)', ['webp', 'jpeg'])
+
+    #draw_plt([66, 68, 33, 35, 52, 55], [100, 90, 80], "YYY", 'XXX', 'test #02', ['only-x', 'only - y'])
+    #x = range(3)
+    #y = range(3*9)
+    #draw_plt(y, x, "3*9", '3', 'test #03', ['#ff0000','#00ff00','#0000ff','#ffff00','#ff00ff','#00ffff','#ff8000','#000000','#c0c0c0'])
     pass
 
 if __name__ == "__main__":
-    main(), '#000000'
+    main()
