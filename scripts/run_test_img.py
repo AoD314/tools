@@ -51,23 +51,16 @@ def draw_plt(y, x, yt, xt, t, leg):
     plt.ylabel(yt)
     plt.xlabel(xt)
     plt.title(t)
-
     n = len(y) / len(x)
-
-    width = 0.5 / float(n)
-    
+    width = (0.5 + (float(n) - 1.0) / ( 2.0 * float(n))) / float(n)
     ind = np.arange(len(x))
     l = []
     for i in range(n):
         l += [plt.bar(ind + i * width, y[i*len(x):(i+1)*len(x)], width, color=colors[i])[0]]
-
     lab = [str(i) for i in x]
     plt.xticks(ind + width * n / 2.0, lab)
-
     plt.legend(l, leg)
-
     plt.show()
-
 
 
 def grep_data():
