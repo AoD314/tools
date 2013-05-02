@@ -140,6 +140,12 @@ def get_array_by_table(table, val):
     elif val == 'cmpr':
         for t in tab:
             a += [t.cmpr]
+    elif val == 'dec':
+        for t in tab:
+            a += [t.dec]
+    elif val == 'enc':
+        for t in tab:
+            a += [t.enc]
 
     return a
 
@@ -160,12 +166,9 @@ def main():
         l = grep_data_by(table, '.jpeg', '*', r[0], r[1])
         y_jpeg = get_array_by_table(l, 'psnr')
         
-        l = grep_data_by(table, '.jp2', '*', r[0], r[1])
-        y_jp2 = get_array_by_table(l, 'psnr')
-
-        y = merge_arr(y_webp, y_jpeg, y_jp2)
+        y = merge_arr(y_webp, y_jpeg)
         
-        draw_plt(y, x, "PSNR", "Quality", 'WebP vs Jpeg vs Jpeg2000 (Quality-PSNR) [' + str(r[0]) + 'x' + str(r[1]) + ']', ['webp', 'jpeg', 'jpeg2000'])
+        draw_plt(y, x, "PSNR", "Quality", 'WebP vs Jpeg (Quality-PSNR) [' + str(r[0]) + 'x' + str(r[1]) + ']', ['webp', 'jpeg'])
 
 
     for r in res:
@@ -178,12 +181,39 @@ def main():
         l = grep_data_by(table, '.jpeg', '*', r[0], r[1])
         y_jpeg = get_array_by_table(l, 'cmpr')
         
-        l = grep_data_by(table, '.jp2', '*', r[0], r[1])
-        y_jp2 = get_array_by_table(l, 'cmpr')
-
-        y = merge_arr(y_webp, y_jpeg, y_jp2)
+        y = merge_arr(y_webp, y_jpeg)
         
-        draw_plt(y, x, "Compression Size(kb)", "Quality", 'WebP vs Jpeg vs Jpeg2000 (Quality-PSNR) [' + str(r[0]) + 'x' + str(r[1]) + ']', ['webp', 'jpeg', 'jpeg2000'])
+        draw_plt(y, x, "Compression Size(kb)", "Quality", 'WebP vs Jpeg (Quality-Compression Size) [' + str(r[0]) + 'x' + str(r[1]) + ']', ['webp', 'jpeg'])
+
+
+    for r in res:
+        l = grep_data_by(table, '.webp', '*', r[0], r[1])
+        x = get_array_by_table(l, 'params')
+
+        l = grep_data_by(table, '.webp', '*', r[0], r[1])
+        y_webp = get_array_by_table(l, 'enc')
+
+        l = grep_data_by(table, '.jpeg', '*', r[0], r[1])
+        y_jpeg = get_array_by_table(l, 'enc')
+        
+        y = merge_arr(y_webp, y_jpeg)
+        
+        draw_plt(y, x, "Encoding Time(ms)", "Quality", 'WebP vs Jpeg (Quality-Encoding Time) [' + str(r[0]) + 'x' + str(r[1]) + ']', ['webp', 'jpeg'])
+
+
+    for r in res:
+        l = grep_data_by(table, '.webp', '*', r[0], r[1])
+        x = get_array_by_table(l, 'params')
+
+        l = grep_data_by(table, '.webp', '*', r[0], r[1])
+        y_webp = get_array_by_table(l, 'dec')
+
+        l = grep_data_by(table, '.jpeg', '*', r[0], r[1])
+        y_jpeg = get_array_by_table(l, 'dec')
+        
+        y = merge_arr(y_webp, y_jpeg)
+        
+        draw_plt(y, x, "Decoding Time(ms)", "Quality", 'WebP vs Jpeg (Quality-Decoding Time) [' + str(r[0]) + 'x' + str(r[1]) + ']', ['webp', 'jpeg'])
 
 if __name__ == "__main__":
     main()
