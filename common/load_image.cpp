@@ -1,6 +1,6 @@
 
 #include "load_image.hpp"
-#include "opencv2/highgui.hpp"
+#include <opencv2/opencv.hpp>
 
 Loader::Loader(std::string name, int start_index)
 {
@@ -10,7 +10,7 @@ Loader::Loader(std::string name, int start_index)
 
 std::string Loader::get_full_name()
 {
-    std::string name = cv::format(filename.c_str(), idx++);
+    std::string name(cv::format(filename.c_str(), idx++));
     return name;
 }
 

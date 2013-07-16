@@ -1,6 +1,7 @@
 
 #include "save_image.hpp"
-#include "opencv2/highgui.hpp"
+#include <opencv2/opencv.hpp>
+#include <opencv2/highgui/highgui_c.h>
 
 using namespace cv;
 
@@ -15,7 +16,7 @@ std::string Saver::get_full_name()
 	if (t == JPEG) ext = "jpeg";
 	if (t == WEBP) ext = "webp";
 
-    std::string name = cv::format(filename.c_str(), idx++);
+    std::string name(cv::format(filename.c_str(), idx++));
 
     return name;
 }
