@@ -2,8 +2,7 @@
 #include <iostream>
 #include <fstream>
 
-#include "opencv2/highgui.hpp"
-#include "opencv2/contrib.hpp"
+#include <opencv2/opencv.hpp>
 
 #include "get_stat.hpp"
 #include "save_image.hpp"
@@ -50,17 +49,17 @@ void get_stat(std::string orig, std::string save, int compress)
 
     std::cout << "{" << std::endl;
 
-    std::cout << cv::format("format        :%s;\n",   save.substr(save.find_last_of('.')).c_str());
-    std::cout << cv::format("params        :%d;\n",   compress);
-    std::cout << cv::format("cmpr size(Kb) :%.8f;\n", save_size);
-    std::cout << cv::format("orig size(Kb) :%.8f;\n", orig_size);
-    std::cout << cv::format("enc  time(ms) :%.8f;\n", time_enc);
-    std::cout << cv::format("dec  time(ms) :%.8f;\n", time_dec);
-    std::cout << cv::format("PSNR          :%.8f;\n", psnr);
-    std::cout << cv::format("width         :%d;\n", mat_orig.cols);
-    std::cout << cv::format("heigth        :%d;\n", mat_orig.rows);
+    std::cout << std::string(cv::format("format        :%s;\n",   save.substr(save.find_last_of('.')).c_str()));
+    std::cout << std::string(cv::format("params        :%d;\n",   compress));
+    std::cout << std::string(cv::format("cmpr size(Kb) :%.8f;\n", save_size));
+    std::cout << std::string(cv::format("orig size(Kb) :%.8f;\n", orig_size));
+    std::cout << std::string(cv::format("enc  time(ms) :%.8f;\n", time_enc));
+    std::cout << std::string(cv::format("dec  time(ms) :%.8f;\n", time_dec));
+    std::cout << std::string(cv::format("PSNR          :%.8f;\n", psnr));
+    std::cout << std::string(cv::format("width         :%d;\n", mat_orig.cols));
+    std::cout << std::string(cv::format("heigth        :%d;\n", mat_orig.rows));
 
-    std::cout << "}" << std::endl;
+    std::cout << "}\n";
 
 }
 

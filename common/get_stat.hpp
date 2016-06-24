@@ -5,7 +5,7 @@
 #include <string>
 #include <opencv2/core.hpp>
 
-const int count_repeat = 10;
+const int count_repeat = 5;
 
 void get_stat(std::string orig, std::string save, int compress = 100);
 

@@ -1,7 +1,7 @@
 
 #include <iostream>
 #include "settings.hpp"
-#include "opencv2/core.hpp"
+#include <opencv2/opencv.hpp>
 
 const std::string keys =
 {
