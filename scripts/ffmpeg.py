@@ -18,9 +18,10 @@ def create_cmd(fps, codec, bitrate, output):
     input = " {0} -i bbb-png-big/output_%05d.png ".format(f)
 
     c = " -codec:v "
-    if (codec == "XVID"): c += "libxvid -q:v 2 -qp 1 -vtag xvid "
     if (codec == "H264"): c += "libx264 -preset placebo -pix_fmt yuv420p "
-    if (codec == "WebM"): c += "libvpx -deadline best -f webm "
+    if (codec == "H265"): c += "libx265 -preset placebo -pix_fmt yuv420p "
+    if (codec == "vp8"): c += "libvpx -deadline best -f webm -lag-in-frames 0 "
+    if (codec == "vp9"): c += "libvpx-vp9 -deadline best -f webm -lag-in-frames 0 "
 
     b = " -b:v {0}".format(bitrate)
 
@@ -41,7 +42,7 @@ def main():
                         help='set name of output video file')
     parser.add_argument('-b', '--bitrate', type=str, default="40M",
                         help='set bitrate for output video file')
-    parser.add_argument('-c', '--codec', choices=['XVID', 'H264', 'WebM'],
+    parser.add_argument('-c', '--codec', choices=['H264', 'H265', 'vp8', 'vp9'],
                         default='H264', help='set fps for creating video')
     parser.add_argument('-n', type=bool, default=False, help='print cmd donnt run')
     args = parser.parse_args()

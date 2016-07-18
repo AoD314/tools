@@ -12,32 +12,27 @@ void get_stat(std::string orig, std::string save, int compress)
     cv::Mat mat_save;
     cv::Mat mat_orig = cv::imread(orig);
     double time_enc, time_dec;
-    cv::TickMeter timer;
 
-    timer.start();
+    double timer = (double)cv::getTickCount();
 
     for(int i = 0; i < count_repeat; ++i)
     {
         save_image(save, mat_orig, compress);
     }
 
-    timer.stop();
+    double freq = cv::getTickFrequency();
+
+    time_enc = (((double)cv::getTickCount() - timer)/freq) / static_cast<double>(count_repeat);
 
 
-    time_enc = timer.getTimeMilli() / static_cast<double>(count_repeat);
-    timer.reset();
-
-
-    timer.start();
+    timer = (double)cv::getTickCount();
 
     for(int i = 0; i < count_repeat; ++i)
     {
         mat_save = cv::imread(save);
     }
 
-    timer.stop();
-
-    time_dec = timer.getTimeMilli() / static_cast<double>(count_repeat);
+    time_dec = (((double)cv::getTickCount() - timer)/freq) / static_cast<double>(count_repeat);
 
     double psnr = cv::PSNR(mat_orig, mat_save);
 

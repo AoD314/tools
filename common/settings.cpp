@@ -13,7 +13,7 @@ const std::string keys =
     "{  w  width   |   4096      |  width               }"
     "{  h  height  |   4096      |  height              }"
     "{  b  bitrate |     -1      |  bitrate             }"
-    "{  t  threads |      4      |  threads count       }"
+    "{  t  threads |      6      |  threads count       }"
     "{  f  fps     |   30.0      |  fps                 }"
 };
 
@@ -44,7 +44,7 @@ Settings::Settings(int argc, char ** argv)
     }
 
     // check error
-    if (parser.has("help"))
+    if (parser.get<bool>("help"))
     {
         is_exit = true;
         parser.printMessage();
@@ -52,16 +52,16 @@ Settings::Settings(int argc, char ** argv)
     else
     {
         // print stat
-        /*
+        //*/
         std::cout << "STAT:" << std::endl;
-        std::cout << "input     : " << input   << std::endl;
-        std::cout << "output    : " << output  << std::endl;
-        std::cout << "width     : " << width   << std::endl;
-        std::cout << "height    : " << height  << std::endl;
-        std::cout << "bitrate   : " << bitrate << std::endl;
-        std::cout << "threads   : " << threads << std::endl;
-        std::cout << "fps       : " << fps     << std::endl;
-        */
+        std::cout << "\tinput     : " << input   << std::endl;
+        std::cout << "\toutput    : " << output  << std::endl;
+        std::cout << "\twidth     : " << width   << std::endl;
+        std::cout << "\theight    : " << height  << std::endl;
+        std::cout << "\tbitrate   : " << bitrate << std::endl;
+        std::cout << "\tthreads   : " << threads << std::endl;
+        std::cout << "\tfps       : " << fps     << std::endl;
+        //*/
     }
 
 }
@@ -70,7 +70,7 @@ void print_progress(int i, int count)
 {
     i++;
     float pr = 100.0f * i / static_cast<float>(count);
-    std::cout << cv::format("progress : %6.2f    ", pr) << "%";
+    std::cout << cv::format("progress : %6.2f", pr) << "%        ";
     std::cout << cv::format("[%6d / %6d]    (%6d)", i, count, count - i);
     std::cout << std::endl;
 }

@@ -2,9 +2,9 @@
 
 import os
 
-only_print = False # False # True
+only_print = True
 
-codec = ['XVID', 'H264', 'WebM']
+codec = ['H264', 'H265', 'vp8', 'vp9']
 bt    = ['40M', '60M', '80M', '100M', '120M', '140M', '160M', '180M', '200M']
 fps   = ['30', '60', '120']
 res   = [(3840, 2160), (4096, 4096), (7680, 4320), (8192, 8192)]
@@ -23,9 +23,9 @@ for r in res:
     else:
         os.system(cmd)
 
-    for c in codec:
-        for b in bt:
-            for f in fps:
+    for b in bt:
+        for f in fps:
+            for c in codec:
                 cmd = './ffmpeg.py -f ' + str(f) + ' -b ' + str(b) + ' -c ' + str(c) + ' -o benchmark_' + str(w) + 'x' + str(h) + '_' + str(f) + '_'+str(b)+'_'+str(c)+'.mkv'
 
                 if only_print:

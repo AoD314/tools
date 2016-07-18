@@ -20,10 +20,10 @@ def main():
 		os.mkdir(folder_download)
 
 	for i in range(count_images):
-		url  = "http://blender-mirror.kino3d.org/peach/png/big_buck_bunny_{0:05}.png".format(i + start_frame)
+		url  = "http://media.xiph.org/BBB/BBB-1080-png/big_buck_bunny_{0:05}.png".format(i + start_frame)
 		path = "big_buck_bunny_{0:05}.png".format(i + start_frame)
 		download_image(url, path)
-		print("{:7.2%}   :  ".format(i + 1 / count_images), url, " --> ", path)
+		print("{:7.2%}   :  ".format((i + 1) / count_images), url, " --> ", path)
 		time.sleep(1.0) # for low level load on server
 	print('done.')
 

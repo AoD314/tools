@@ -40,7 +40,7 @@ set_option(ENABLE_WARNINGS_ARE_ERRORS   "Treat warnings as errors"              
 
 set_option(ENABLE_OPENMP                "Enamble OpenMP"                                              OFF  IF (CXX_MS OR CXX_GCC OR CXX_INTEL) )
 set_option(ENABLE_DEBUG_INFO            "Add debug info"                                              ON   )
-set_option(ENABLE_RELEASE               "Build RELEASE"                                               OFF  )
+set_option(ENABLE_RELEASE               "Build RELEASE"                                               ON  )
 set_option(CMAKE_VERBOSE                "Verbose mode"                                                OFF  )
 
 ############## include all compilers #############

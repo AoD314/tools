@@ -7,13 +7,13 @@ if(CXX_GCC)
     message(STATUS "C++ compiler version: ${gcc_compiler_version} [${CMAKE_CXX_COMPILER}]")
 
     if(${ENABLE_WARNINGS_ARE_ERRORS})
-        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x ")
-        set(CMAKE_C_FLAGS     "${CMAKE_C_FLAGS} -std=c++0x ")
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Werror ")
+        set(CMAKE_C_FLAGS     "${CMAKE_C_FLAGS} -Werror ")
     endif()
 
     if(${ENABLE_C++11})
-        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x ")
-        set(CMAKE_C_FLAGS     "${CMAKE_C_FLAGS} -std=c++0x ")
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 ")
+        set(CMAKE_C_FLAGS     "${CMAKE_C_FLAGS} -std=c++11 ")
     endif()
 
     if(${ENABLE_DEBUG_INFO})
