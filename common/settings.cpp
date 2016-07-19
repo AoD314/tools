@@ -35,12 +35,12 @@ Settings::Settings(int argc, char ** argv)
     count    = parser.get<int>("c");
     start    = parser.get<int>("s");
 
-    bitrate = parser.get<unsigned int>("b");
+    bitrate = static_cast<int64_t>(parser.get<unsigned int>("b"));
     if (bitrate == -1)
     {
-        bitrate = static_cast<unsigned int>(
-                    static_cast<float>(width) / 3.0 *
-                    static_cast<float>(height) * 2.0 / 1024.0 * fps );
+        bitrate = static_cast<int64_t>(
+                    static_cast<double>(width) / 3.0 *
+                    static_cast<double>(height) * 2.0 / 1024.0 * static_cast<double>(fps) );
     }
 
     // check error
@@ -69,7 +69,7 @@ Settings::Settings(int argc, char ** argv)
 void print_progress(int i, int count)
 {
     i++;
-    float pr = 100.0f * i / static_cast<float>(count);
+    float pr = 100.0f * static_cast<float>(i) / static_cast<float>(count);
     std::cout << cv::format("progress : %6.2f", pr) << "%        ";
     std::cout << cv::format("[%6d / %6d]    (%6d)", i, count, count - i);
     std::cout << std::endl;

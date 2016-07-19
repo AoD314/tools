@@ -2,24 +2,19 @@
 # need gcc >=4.7.1
 
 if(CXX_GCC)
-    exec_program(${CMAKE_CXX_COMPILER} ARGS --version OUTPUT_VARIABLE _compiler_output)
-    string(REGEX REPLACE ".* ([0-9]\\.[0-9]\\.[0-9]) .*" "\\1" gcc_compiler_version ${_compiler_output})
-    message(STATUS "C++ compiler version: ${gcc_compiler_version} [${CMAKE_CXX_COMPILER}]")
-
     if(${ENABLE_WARNINGS_ARE_ERRORS})
-        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Werror ")
-        set(CMAKE_C_FLAGS     "${CMAKE_C_FLAGS} -Werror ")
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Werror -pedantic-errors ")
+        set(CMAKE_C_FLAGS     "${CMAKE_C_FLAGS} -Werror -pedantic-errors ")
+    endif()
+
+    if(${ENABLE_OPTIMIZATION})
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Ofast -funroll-loops -flto -ftree-vectorize -fschedule-insns -fsched-pressure -march=native ")
+        set(CMAKE_C_FLAGS     "${CMAKE_C_FLAGS} -Ofast -funroll-loops -flto -ftree-vectorize -fschedule-insns -fsched-pressure -march=native ")
     endif()
 
     if(${ENABLE_C++11})
-        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 ")
-        set(CMAKE_C_FLAGS     "${CMAKE_C_FLAGS} -std=c++11 ")
-    endif()
-
-    if(${ENABLE_DEBUG_INFO})
-        set(CMAKE_BUILD_TYPE "Debug")
-        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g ")
-        set(CMAKE_C_FLAGS     "${CMAKE_C_FLAGS} -g ")
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wc++11-compat ")
+        set(CMAKE_C_FLAGS     "${CMAKE_C_FLAGS} -std=c11 ")
     endif()
 
     if(${ENABLE_RELEASE})
@@ -29,16 +24,28 @@ if(CXX_GCC)
     else()
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O0 ")
         set(CMAKE_C_FLAGS     "${CMAKE_C_FLAGS} -O0 ")
+        set(ENABLE_DEBUG_INFO ON)
+    endif()
+
+    if(${ENABLE_DEBUG_INFO})
+        set(CMAKE_BUILD_TYPE "Debug")
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g3 -ggdb ")
+        set(CMAKE_C_FLAGS     "${CMAKE_C_FLAGS} -g3 -ggdb ")
     endif()
 
     if(${ENABLE_ALLWARNING})
-        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -pedantic -Weffc++ -Wconversion -Wsign-conversion -Wold-style-cast -Wunreachable-code -Woverloaded-virtual -Wctor-dtor-privacy -Wnon-virtual-dtor -Wenum-compare ")
-        set(CMAKE_C_FLAGS     "${CMAKE_C_FLAGS} -Wall -Wextra -pedantic -Weffc++ -Wconversion -Wsign-conversion -Wold-style-cast -Wunreachable-code -Woverloaded-virtual -Wctor-dtor-privacy -Wnon-virtual-dtor -Wenum-compare ")
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -pedantic -Weffc++ -Wconversion -Wsign-conversion -Wold-style-cast -Wunreachable-code -Woverloaded-virtual -Wctor-dtor-privacy -Wnon-virtual-dtor -Wenum-compare -Wshadow -Wformat=2 -Wstrict-overflow=5 ")
+        set(CMAKE_C_FLAGS     "${CMAKE_C_FLAGS} -Wall -Wextra -pedantic -Weffc++ -Wconversion -Wsign-conversion -Wold-style-cast -Wunreachable-code -Woverloaded-virtual -Wctor-dtor-privacy -Wnon-virtual-dtor -Wenum-compare -Wshadow -Wformat=2 -Wstrict-overflow=5 ")
     endif()
 
     if(${ENABLE_PROFILING})
-        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pg ")
-        set(CMAKE_C_FLAGS     "${CMAKE_C_FLAGS} -pg ")
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pg -fsanitize=address -fsanitize=thread ")
+        set(CMAKE_C_FLAGS     "${CMAKE_C_FLAGS} -pg -fsanitize=address -fsanitize=thread ")
+    endif()
+
+    if(${ENABLE_SSE})
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -msse ")
+        set(CMAKE_C_FLAGS     "${CMAKE_C_FLAGS} -msse ")
     endif()
 
     if(${ENABLE_SSE2})
@@ -71,9 +78,18 @@ if(CXX_GCC)
         set(CMAKE_C_FLAGS     "${CMAKE_C_FLAGS} -mavx ")
     endif()
 
+    if(${ENABLE_AVX2})
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mavx2 ")
+        set(CMAKE_C_FLAGS     "${CMAKE_C_FLAGS} -mavx2 ")
+    endif()
+
     if(${ENABLE_OPENMP})
-        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mopenmp ")
-        set(CMAKE_C_FLAGS     "${CMAKE_C_FLAGS} -mopenmp ")
+        find_package(OpenMP REQUIRED)
+    endif()
+
+    if(${ENABLE_REPORT})
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fopt-info-all=opt.all.txt ")
+        set(CMAKE_C_FLAGS     "${CMAKE_C_FLAGS} -fopt-info-all=opt.all.txt ")
     endif()
 
 endif()

@@ -18,7 +18,7 @@ class Settings
         int start;
         int width;
         int height;
-        unsigned int bitrate;
+        int64_t bitrate;
 
         float fps;
         int frame_count;
